@@ -7,6 +7,10 @@
       - virtualenv
       update_cache: yes
     become: yes
+  - name: Validando se projeto já existe
+    stat:
+      path: /home/ubuntu/tcc/setup/settings.py
+    register: projeto
   - name: Instalando dependências com pip (Django e Django Rest)
     pip:
       virtualenv: /home/ubuntu/tcc/venv
@@ -15,6 +19,7 @@
         - djangorestframework
   - name: Iniciando o projeto Django
     shell: '. /home/ubuntu/tcc/venv/bin/activate; django-admin startproject setup /home/ubuntu/tcc/'
+    when: not projeto.stat.exists
   - name: Alterando arquivo settings.py
     lineinfile:
       path: /home/ubuntu/tcc/setup/settings.py

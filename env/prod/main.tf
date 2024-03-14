@@ -5,3 +5,7 @@ module "aws-prod" {
   region_aws = "us-west-2"
   ssh_key = "iac-prod"
 }
+
+output "IP" {
+    value = module.aws_prod.PUBLIC_IP
+}
