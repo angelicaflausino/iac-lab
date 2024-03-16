@@ -1,6 +1,5 @@
 resource "aws_security_group" "team_access_group" {
-  name = "team_access_group"
-  description = "Grupo de acesso geral"
+  name = var.security_group
   ingress {
     cidr_blocks = [ "0.0.0.0/0" ]
     ipv6_cidr_blocks = [ "::/0" ]
@@ -16,6 +15,6 @@ resource "aws_security_group" "team_access_group" {
     protocol = "-1"
   }
   tags = {
-    name = "IACLABMOD2"
+    name = "ALURAMOD3"
   }
 }

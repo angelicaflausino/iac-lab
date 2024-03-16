@@ -4,8 +4,13 @@ module "aws_dev" {
   instance_size = "t2.micro"
   region_aws = "us-west-2"
   ssh_key = "iac-dev"
+  security_group = "DEV"
+  group_name = "Dev"
+  group_max_size = 1
+  group_min_size = 0
+  is_prod = false
 }
 
-output "IP" {
-    value = module.aws_dev.PUBLIC_IP
-}
+# output "IP" {
+#     value = module.aws_dev.PUBLIC_IP
+# }

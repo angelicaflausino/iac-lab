@@ -13,3 +13,23 @@ variable "instance_size" {
 variable "instance_ami" {
   type = string
 }
+
+variable "security_group" {
+  type = string
+}
+
+variable "group_name" {
+  type = string
+}
+
+variable "group_max_size" {
+  type = number
+}
+
+variable "group_min_size" {
+  type = number
+}
+
+variable "is_prod" {
+  type = bool
+}

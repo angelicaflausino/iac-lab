@@ -46,3 +46,9 @@ terraform.rc
 /env/dev/iac-dev
 /env/prod/iac-prod
 
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
