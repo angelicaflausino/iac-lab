@@ -55,6 +55,26 @@ resource "aws_autoscaling_group" "ac_group" {
   target_group_arns = var.is_prod ? [ aws_lb_target_group.target_load_balancer[0].arn ] : []
 }
 
+resource "aws_autoscaling_schedule" "ac_group_schedule_on" {
+  scheduled_action_name  = "ac-group-schedule-on"
+  min_size               = 0
+  max_size               = 1
+  desired_capacity       = 1
+  start_time             = timeadd(timestamp(), "10m")
+  recurrence = "0 10 * * MON-FRI" #FUSO HORARIO UTC
+  autoscaling_group_name = aws_autoscaling_group.ac_group.name
+}
+
+resource "aws_autoscaling_schedule" "ac_group_schedule_off" {
+  scheduled_action_name  = "ac-group-schedule-off"
+  min_size               = 0
+  max_size               = 1
+  desired_capacity       = 0
+  start_time             = timeadd(timestamp(), "11m")
+  recurrence = "0 21 * * MON-FRI" #FUSO HORARIO UTC
+  autoscaling_group_name = aws_autoscaling_group.ac_group.name
+}
+
 resource "aws_default_subnet" "subnet_1" {
   availability_zone = "${var.region_aws}a"
 }
